@@ -4,6 +4,7 @@ import '../models/habit.dart';
 import 'add_habit_screen.dart';
 import '../data/habit_store.dart';
 import 'habit_detail_screen.dart';
+import 'statistics_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,11 +15,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final HabitStore _store = HabitStore(initialHabits: _createSamples());
+  final _search = TextEditingController();
 
   @override
   void dispose() {
     _store.dispose();
+    _search.dispose();
     super.dispose();
+  }
+
+  DateTime? _selectedDay;
+  String _query = '';
+  HabitCategory? _category;
+
+  Future<void> _chooseDate() async {
+    final created = _store.habits.map((h) => h.createdAt).toList()..sort();
+    final first = created.isEmpty ? _store.today : created.first;
+    final date = await showDatePicker(
+      context: context,
+      initialDate: _selectedDay ?? _store.today,
+      firstDate: first,
+      lastDate: _store.today,
+    );
+    if (date != null && mounted) setState(() => _selectedDay = date);
   }
 
   List<Habit> _createSamples() {
@@ -60,22 +79,49 @@ class _HomeScreenState extends State<HomeScreen> {
       MaterialPageRoute(builder: (_) => AddHabitScreen(id: _store.nextId())),
     );
     if (!mounted || habit == null) return;
-    setState(() => _store.add(habit));
+    setState(() {
+      _store.add(habit);
+      _selectedDay = null;
+      _query = '';
+      _search.clear();
+      _category = null;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
+    final today = _selectedDay ?? DateTime(now.year, now.month, now.day);
 
     final habits = _store.habits
         .where((habit) => habit.isAvailableOn(today))
+        .toList();
+    final visibleHabits = habits
+        .where(
+          (h) =>
+              (_category == null || h.category == _category) &&
+              ('${h.name} ${h.note}'.toLowerCase().contains(
+                _query.trim().toLowerCase(),
+              )),
+        )
         .toList();
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Nhịp Sống'),
         leading: const Icon(Icons.spa_outlined),
+        actions: [
+          IconButton(
+            tooltip: 'Thống kê 7 ngày',
+            icon: const Icon(Icons.bar_chart),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute<void>(
+                builder: (_) => StatisticsScreen(store: _store),
+              ),
+            ),
+          ),
+        ],
         backgroundColor: theme.scaffoldBackgroundColor,
       ),
       body: SafeArea(
@@ -86,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: const EdgeInsets.all(20),
               children: [
                 Text(
-                  'HÔM NAY · ${today.day}/${today.month}/${today.year}',
+                  '${_selectedDay == null ? 'HÔM NAY' : 'NGÀY ĐÃ CHỌN'} · ${today.day}/${today.month}/${today.year}',
                   style: theme.textTheme.labelLarge?.copyWith(
                     color: theme.colorScheme.primary,
                     letterSpacing: 1,
@@ -125,7 +171,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 28),
                 Text(
-                  'Thói quen hôm nay',
+                  _selectedDay == null
+                      ? 'Thói quen hôm nay'
+                      : 'Thói quen ngày đã chọn',
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -143,11 +191,71 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Đã hoàn thành ${habits.where((habit) => _store.isCompleted(habit.id, today)).length}/${habits.length} hôm nay',
+                  'Đã hoàn thành ${habits.where((habit) => _store.isCompleted(habit.id, today)).length}/${habits.length} ${_selectedDay == null ? 'hôm nay' : 'ngày đã chọn'}',
                   style: theme.textTheme.titleMedium,
                 ),
                 const SizedBox(height: 16),
-                for (final habit in habits)
+                OutlinedButton.icon(
+                  onPressed: _chooseDate,
+                  icon: const Icon(Icons.calendar_month),
+                  label: Text(
+                    'Chọn ngày · ${today.day}/${today.month}/${today.year}',
+                  ),
+                ),
+                if (_selectedDay != null)
+                  TextButton(
+                    onPressed: () => setState(() => _selectedDay = null),
+                    child: const Text('Về hôm nay'),
+                  ),
+                const SizedBox(height: 12),
+                LinearProgressIndicator(value: _store.progress(today)),
+                const SizedBox(height: 16),
+                TextFormField(
+                  key: const ValueKey('search'),
+                  controller: _search,
+                  decoration: const InputDecoration(
+                    labelText: 'Tìm theo tên hoặc ghi chú',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (value) => setState(() => _query = value),
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<HabitCategory>(
+                  key: ValueKey(_category),
+                  initialValue: _category,
+                  decoration: const InputDecoration(
+                    labelText: 'Lọc theo nhóm',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: const [
+                    DropdownMenuItem(value: null, child: Text('Tất cả')),
+                    DropdownMenuItem(
+                      value: HabitCategory.health,
+                      child: Text('Sức khỏe'),
+                    ),
+                    DropdownMenuItem(
+                      value: HabitCategory.learning,
+                      child: Text('Học tập'),
+                    ),
+                    DropdownMenuItem(
+                      value: HabitCategory.mindfulness,
+                      child: Text('Tinh thần'),
+                    ),
+                    DropdownMenuItem(
+                      value: HabitCategory.personal,
+                      child: Text('Cá nhân'),
+                    ),
+                  ],
+                  onChanged: (value) => setState(() => _category = value),
+                ),
+                const SizedBox(height: 16),
+                if (visibleHabits.isEmpty)
+                  const Padding(
+                    padding: EdgeInsets.all(24),
+                    child: Text('Không có thói quen phù hợp.'),
+                  ),
+                for (final habit in visibleHabits)
                   _HabitCard(
                     habit: habit,
                     isCompleted: _store.isCompleted(habit.id, today),
