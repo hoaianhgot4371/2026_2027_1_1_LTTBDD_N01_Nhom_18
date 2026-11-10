@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../models/habit.dart';
 import 'add_habit_screen.dart';
+import '../data/habit_store.dart';
+import 'habit_detail_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,9 +13,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final Map<DateTime, Set<String>> _completedByDay = {};
-  int _nextId = 0;
-  late final List<Habit> _habits = _createSamples();
+  late final HabitStore _store = HabitStore(initialHabits: _createSamples());
+
+  @override
+  void dispose() {
+    _store.dispose();
+    super.dispose();
+  }
 
   List<Habit> _createSamples() {
     final today = DateTime.now();
@@ -51,20 +57,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _addHabit() async {
     final habit = await Navigator.of(context).push<Habit>(
-      MaterialPageRoute(
-        builder: (_) => AddHabitScreen(id: 'custom-${_nextId++}'),
-      ),
+      MaterialPageRoute(builder: (_) => AddHabitScreen(id: _store.nextId())),
     );
     if (!mounted || habit == null) return;
-    setState(() => _habits.add(habit));
+    setState(() => _store.add(habit));
   }
 
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    final completed = _completedByDay[today] ?? <String>{};
-    final habits = _habits
+
+    final habits = _store.habits
         .where((habit) => habit.isAvailableOn(today))
         .toList();
     final theme = Theme.of(context);
@@ -139,27 +143,26 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 12),
                 Text(
-                  'Đã hoàn thành ${habits.where((habit) => completed.contains(habit.id)).length}/${habits.length} hôm nay',
+                  'Đã hoàn thành ${habits.where((habit) => _store.isCompleted(habit.id, today)).length}/${habits.length} hôm nay',
                   style: theme.textTheme.titleMedium,
                 ),
                 const SizedBox(height: 16),
                 for (final habit in habits)
                   _HabitCard(
                     habit: habit,
-                    isCompleted: completed.contains(habit.id),
-                    onChanged: (value) {
-                      setState(() {
-                        final ids = _completedByDay.putIfAbsent(
-                          today,
-                          () => {},
-                        );
-                        if (value) {
-                          ids.add(habit.id);
-                        } else {
-                          ids.remove(habit.id);
-                        }
-                      });
+                    isCompleted: _store.isCompleted(habit.id, today),
+                    onOpen: () async {
+                      await Navigator.of(context).push<void>(
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              HabitDetailScreen(store: _store, id: habit.id),
+                        ),
+                      );
+                      if (mounted) setState(() {});
                     },
+                    onChanged: (value) => setState(
+                      () => _store.setCompleted(habit.id, today, value),
+                    ),
                   ),
                 const SizedBox(height: 8),
                 const Text(
@@ -180,10 +183,12 @@ class _HabitCard extends StatelessWidget {
     required this.habit,
     required this.isCompleted,
     required this.onChanged,
+    required this.onOpen,
   });
   final Habit habit;
   final bool isCompleted;
   final ValueChanged<bool> onChanged;
+  final VoidCallback onOpen;
 
   @override
   Widget build(BuildContext context) {
@@ -243,6 +248,10 @@ class _HabitCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(habit.note),
+                  TextButton(
+                    onPressed: onOpen,
+                    child: const Text('Xem chi tiết'),
+                  ),
                   const SizedBox(height: 8),
                   Row(
                     children: [

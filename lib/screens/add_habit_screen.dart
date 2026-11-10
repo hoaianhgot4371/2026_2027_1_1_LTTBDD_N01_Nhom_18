@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/habit.dart';
 
 class AddHabitScreen extends StatefulWidget {
-  const AddHabitScreen({super.key, required this.id});
+  const AddHabitScreen({super.key, required this.id, this.habit});
   final String id;
+  final Habit? habit;
 
   @override
   State<AddHabitScreen> createState() => _AddHabitScreenState();
@@ -15,6 +16,14 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
   final _name = TextEditingController();
   final _note = TextEditingController();
   HabitCategory _category = HabitCategory.health;
+
+  @override
+  void initState() {
+    super.initState();
+    _name.text = widget.habit?.name ?? '';
+    _note.text = widget.habit?.note ?? '';
+    _category = widget.habit?.category ?? HabitCategory.health;
+  }
 
   @override
   void dispose() {
@@ -31,14 +40,16 @@ class _AddHabitScreenState extends State<AddHabitScreen> {
         name: _name.text.trim(),
         note: _note.text.trim(),
         category: _category,
-        createdAt: DateTime.now(),
+        createdAt: widget.habit?.createdAt ?? DateTime.now(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: const Text('Thêm thói quen')),
+    appBar: AppBar(
+      title: Text(widget.habit == null ? 'Thêm thói quen' : 'Sửa thói quen'),
+    ),
     body: SafeArea(
       child: Center(
         child: ConstrainedBox(
