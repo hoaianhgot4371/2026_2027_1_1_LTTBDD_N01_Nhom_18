@@ -1,11 +1,11 @@
 {
-    "name": "nhip_song",
-    "short_name": "nhip_song",
+    "name": "Nhịp Sống",
+    "short_name": "Nhịp Sống",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Ứng dụng theo dõi thói quen, dữ liệu trong RAM.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

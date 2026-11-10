@@ -1,0 +1,18 @@
+{
+  "environment": "Chrome headless, local Flutter release web build; desktop 1280x1000 and emulated 390x844 viewport, not Android",
+  "steps": [
+    "Blank save displayed Vietnamese name error.",
+    "Saved new habit; total changed from 4 to 5.",
+    "Marked water complete; count changed to 1/5.",
+    "Opened details and delete confirmation; cancelled deletion.",
+    "Statistics displayed 1/5 (20%).",
+    "Captured team information (name/MSV verified visually).",
+    "Changed UI to English and captured narrow home and form."
+  ],
+  "timestamp": "2026-11-10T21:44:03+0700",
+  "limitations": [
+    "No Android device attached.",
+    "No video created.",
+    "Screenshots are runtime evidence, not student-drawn diagrams."
+  ]
+}
