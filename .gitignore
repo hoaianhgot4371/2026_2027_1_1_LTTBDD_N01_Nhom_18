@@ -49,3 +49,19 @@ app.*.map.json
 
 # Local submission bundles (generated, not source)
 /deliverables/
+
+# Private handover materials
+/output/
+/docs/code-guide.md
+/docs/demo/
+/docs/diagram-instructions.md
+/docs/report/
+/docs/slides/
+/docs/submission-checklist.md
+/docs/verification/summary.md
+/docs/verification/document-validation.json
+/tools/README.md
+/tools/build_documents.py
+/tools/package_submission.py
+/tools/requirements-docs.txt
+/tools/validate_documents.py

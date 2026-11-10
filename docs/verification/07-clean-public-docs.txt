@@ -1,0 +1,87 @@
+﻿Verification batch: 07-clean-public-docs
+Local timestamp: 2026-11-10T22:10:51.5839668+07:00
+
+> flutter analyze
+Analyzing nhip_song_nhom18...
+No issues found! (ran in 8.6s)
+Exit code: 0
+
+> flutter test
+00:00 +0: loading C:/Users/hoaia/DuAn/nhip_song_nhom18/test/habit_detail_test.dart
+00:00 +0: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/habit_store_test.dart: Reject future, before creation and unknown habit; normalize time
+00:00 +1: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/habit_store_test.dart: Daily denominator excludes habits not yet created; zero is safe
+00:00 +2: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/habit_store_test.dart: Edit preserves creation/history, delete removes completion, ids unique
+00:00 +3: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/habit_store_test.dart: Streak tolerates incomplete today, breaks at gap, resets with new store
+00:00 +4: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:00 +5: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:02 +6: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/search_statistics_test.dart: Search and category intersect; empty result and seven-day statistics
+00:03 +7: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/localization_date_test.dart: English labels, errors, delete dialog; user content is not translated
+00:03 +8: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/widget_test.dart: Tên trống hoặc chỉ có khoảng trắng không được lưu
+00:03 +9: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/localization_date_test.dart: Past date is independent and future date is disabled in picker
+00:03 +10: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/widget_test.dart: Thêm hợp lệ cắt khoảng trắng và giữ trạng thái hoàn thành cũ
+00:04 +11: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/widget_test.dart: Thêm hợp lệ cắt khoảng trắng và giữ trạng thái hoàn thành cũ
+00:04 +12: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/widget_test.dart: Hủy hoặc quay lại không thêm thói quen
+00:04 +13: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/widget_test.dart: Đánh dấu và hủy hoàn thành cập nhật số lượng độc lập
+00:05 +14: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/widget_test.dart: Trang chủ hiển thị dữ liệu mẫu và cảnh báo RAM
+00:05 +15: C:/Users/hoaia/DuAn/nhip_song_nhom18/test/widget_test.dart: Trang chủ cuộn được trên màn hình hẹp với chữ lớn
+00:05 +16: All tests passed!
+Exit code: 0
+
+> flutter build apk --release
+Running Gradle task 'assembleRelease'...
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if "Windows_NT" == "Windows_NT" setlocal
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set DEFAULT_JVM_OPTS=
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set DIRNAME=C:\Users\hoaia\DuAn\nhip_song_nhom18\android\
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if "C:\Users\hoaia\DuAn\nhip_song_nhom18\android\" == "" set DIRNAME=.
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set APP_BASE_NAME=gradlew
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set APP_HOME=C:\Users\hoaia\DuAn\nhip_song_nhom18\android\
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if defined JAVA_HOME goto findJavaFromJavaHome
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set JAVA_HOME=C:\Program Files\Android\Android Studio\jbr
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set JAVA_EXE=C:\Program Files\Android\Android Studio\jbr/bin/java.exe
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if exist "C:\Program Files\Android\Android Studio\jbr/bin/java.exe" goto init
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if not "Windows_NT" == "Windows_NT" goto win9xME_args
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if "@eval[2+2]" == "4" goto 4NT_args
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set CMD_LINE_ARGS=
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set _SKIP=2
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if "x-q" == "x" goto execute
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set CMD_LINE_ARGS=-q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9CVUlMRF9OQU1FPTEuMC4w,RkxVVFRFUl9CVUlMRF9OVU1CRVI9MQ==,RkxVVFRFUl9WRVJTSU9OPTMuNDcuOQ==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049YzE5N2NhNTE5OQ==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049ODljMzllZGZkZg==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMy43 -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=true -Pflutter.androidSdkRoot=C:\Users\hoaia\AppData\Local\Android\sdk -Pflutter.installedNdkVersions=28.2.13676358,30.0.16248370 -Pflutter.sdkManagerPath=C:\Users\hoaia\AppData\Local\Android\sdk\cmdline-tools\latest\bin\sdkmanager.bat assembleRelease
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>goto execute
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>set CLASSPATH=C:\Users\hoaia\DuAn\nhip_song_nhom18\android\\gradle\wrapper\gradle-wrapper.jar
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>"C:\Program Files\Android\Android Studio\jbr/bin/java.exe"    "-Dorg.gradle.appname=gradlew" -classpath "C:\Users\hoaia\DuAn\nhip_song_nhom18\android\\gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain -q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9CVUlMRF9OQU1FPTEuMC4w,RkxVVFRFUl9CVUlMRF9OVU1CRVI9MQ==,RkxVVFRFUl9WRVJTSU9OPTMuNDcuOQ==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049YzE5N2NhNTE5OQ==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049ODljMzllZGZkZg==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMy43 -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=true -Pflutter.androidSdkRoot=C:\Users\hoaia\AppData\Local\Android\sdk -Pflutter.installedNdkVersions=28.2.13676358,30.0.16248370 -Pflutter.sdkManagerPath=C:\Users\hoaia\AppData\Local\Android\sdk\cmdline-tools\latest\bin\sdkmanager.bat assembleRelease
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/C:/Users/hoaia/.gradle/wrapper/dists/gradle-9.3.1-all/9ot9r568e8zfvvd4mn8rbu1j0/gradle-9.3.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+System.Management.Automation.RemoteException
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if "0" == "0" goto mainEnd
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\android>if "Windows_NT" == "Windows_NT" endlocal
+Running Gradle task 'assembleRelease'...                            3.6s
+√ Built build\app\outputs\flutter-apk\app-release.apk (49.8MB)
+Exit code: 0
+
+> git diff --check
+Exit code: 0
+
+> git diff --cached --check
+Exit code: 0
