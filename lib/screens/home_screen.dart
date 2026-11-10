@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/habit.dart';
+import 'add_habit_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,13 +12,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final Map<DateTime, Set<String>> _completedByDay = {};
+  int _nextId = 0;
+  late final List<Habit> _habits = _createSamples();
 
-  @override
-  Widget build(BuildContext context) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final completed = _completedByDay[today] ?? <String>{};
-    final habits = [
+  List<Habit> _createSamples() {
+    final today = DateTime.now();
+    return [
       Habit(
         id: 'water',
         name: 'Uống đủ nước',
@@ -46,7 +46,27 @@ class _HomeScreenState extends State<HomeScreen> {
         category: HabitCategory.personal,
         createdAt: today,
       ),
-    ].where((habit) => habit.isAvailableOn(today)).toList();
+    ];
+  }
+
+  Future<void> _addHabit() async {
+    final habit = await Navigator.of(context).push<Habit>(
+      MaterialPageRoute(
+        builder: (_) => AddHabitScreen(id: 'custom-${_nextId++}'),
+      ),
+    );
+    if (!mounted || habit == null) return;
+    setState(() => _habits.add(habit));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final completed = _completedByDay[today] ?? <String>{};
+    final habits = _habits
+        .where((habit) => habit.isAvailableOn(today))
+        .toList();
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          'Bạn đang xem dữ liệu mẫu. Dữ liệu chỉ lưu trong RAM và sẽ mất khi đóng ứng dụng.',
+                          'Danh sách ban đầu gồm 4 thói quen mẫu. Dữ liệu chỉ lưu trong RAM và sẽ mất khi đóng ứng dụng.',
                         ),
                       ),
                     ],
@@ -107,7 +127,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text('${habits.length} thói quen mẫu dành cho bạn'),
+                Text('${habits.length} thói quen dành cho bạn'),
+                const SizedBox(height: 12),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: FilledButton.icon(
+                    onPressed: _addHabit,
+                    icon: const Icon(Icons.add),
+                    label: const Text('Thêm thói quen'),
+                  ),
+                ),
                 const SizedBox(height: 12),
                 Text(
                   'Đã hoàn thành ${habits.where((habit) => completed.contains(habit.id)).length}/${habits.length} hôm nay',
