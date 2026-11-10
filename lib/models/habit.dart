@@ -1,4 +1,9 @@
-enum HabitCategory { health, learning, mindfulness, personal }
+enum HabitCategory {
+  health,
+  learning,
+  mindfulness,
+  personal,
+}
 
 class Habit {
   final String id;
@@ -15,5 +20,14 @@ class Habit {
     required this.category,
     this.iconIndex = 0,
     required DateTime createdAt,
-  }) : createdAt = DateTime(createdAt.year, createdAt.month, createdAt.day);
+  }) : createdAt = DateTime(
+          createdAt.year,
+          createdAt.month,
+          createdAt.day,
+        );
+
+  bool isAvailableOn(DateTime date) {
+    final day = DateTime(date.year, date.month, date.day);
+    return !day.isBefore(createdAt);
+  }
 }
