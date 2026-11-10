@@ -3,6 +3,52 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:nhip_song/main.dart';
 
 void main() {
+  testWidgets('Đánh dấu và hủy hoàn thành cập nhật số lượng độc lập', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+    expect(find.text('Đã hoàn thành 0/4 hôm nay'), findsOneWidget);
+
+    Future<void> toggle(String id) async {
+      final checkbox = find.byKey(ValueKey('complete-$id'));
+      await tester.scrollUntilVisible(checkbox, 100);
+      await tester.tap(checkbox);
+      await tester.pump();
+    }
+
+    for (final id in ['water', 'reading', 'breathe', 'journal']) {
+      await toggle(id);
+    }
+    await tester.scrollUntilVisible(
+      find.text('Đã hoàn thành 4/4 hôm nay'),
+      -200,
+    );
+    expect(find.text('Đã hoàn thành 4/4 hôm nay'), findsOneWidget);
+    await toggle('water');
+    expect(
+      tester
+          .widget<Checkbox>(find.byKey(const ValueKey('complete-water')))
+          .value,
+      isFalse,
+    );
+    await tester.scrollUntilVisible(
+      find.text('Đã hoàn thành 3/4 hôm nay'),
+      -200,
+    );
+    expect(find.text('Đã hoàn thành 3/4 hôm nay'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.byKey(const ValueKey('complete-reading')),
+      100,
+    );
+    expect(
+      tester
+          .widget<Checkbox>(find.byKey(const ValueKey('complete-reading')))
+          .value,
+      isTrue,
+    );
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('Trang chủ hiển thị dữ liệu mẫu và cảnh báo RAM', (tester) async {
     await tester.pumpWidget(const MyApp());
     expect(find.text('Nhịp Sống'), findsOneWidget);

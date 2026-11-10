@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 
 import '../models/habit.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final Map<DateTime, Set<String>> _completedByDay = {};
+
+  @override
   Widget build(BuildContext context) {
-    final today = DateTime.now();
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final completed = _completedByDay[today] ?? <String>{};
     final habits = [
       Habit(
         id: 'water',
@@ -99,8 +108,30 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text('${habits.length} thói quen mẫu dành cho bạn'),
+                const SizedBox(height: 12),
+                Text(
+                  'Đã hoàn thành ${habits.where((habit) => completed.contains(habit.id)).length}/${habits.length} hôm nay',
+                  style: theme.textTheme.titleMedium,
+                ),
                 const SizedBox(height: 16),
-                for (final habit in habits) _HabitCard(habit: habit),
+                for (final habit in habits)
+                  _HabitCard(
+                    habit: habit,
+                    isCompleted: completed.contains(habit.id),
+                    onChanged: (value) {
+                      setState(() {
+                        final ids = _completedByDay.putIfAbsent(
+                          today,
+                          () => {},
+                        );
+                        if (value) {
+                          ids.add(habit.id);
+                        } else {
+                          ids.remove(habit.id);
+                        }
+                      });
+                    },
+                  ),
                 const SizedBox(height: 8),
                 const Text(
                   'Mỗi bước nhỏ đều có ý nghĩa.',
@@ -116,8 +147,14 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _HabitCard extends StatelessWidget {
-  const _HabitCard({required this.habit});
+  const _HabitCard({
+    required this.habit,
+    required this.isCompleted,
+    required this.onChanged,
+  });
   final Habit habit;
+  final bool isCompleted;
+  final ValueChanged<bool> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -177,6 +214,22 @@ class _HabitCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(habit.note),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Checkbox(
+                        key: ValueKey('complete-${habit.id}'),
+                        value: isCompleted,
+                        semanticLabel: 'Hoàn thành ${habit.name} hôm nay',
+                        onChanged: (value) => onChanged(value ?? false),
+                      ),
+                      Flexible(
+                        child: Text(
+                          isCompleted ? 'Đã hoàn thành' : 'Chưa hoàn thành',
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
