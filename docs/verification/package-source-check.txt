@@ -1,0 +1,117 @@
+﻿Package clean-source check, 10/11/2026 Asia/Bangkok.
+First attempt: flutter analyze under build/submission-preview/Nhóm_18/Code
+Actual result: exit code 255; analysis server exited.
+FormatException: Unexpected end of input (at character 440)
+.../Nh%C3%B3m_18/Code/"}],"capabilities":{"window":{"workDoneProgress":true}}}
+No application code was changed to suppress this error.
+Next attempt uses identical files from the ZIP Code subtree under ASCII build/submission-code-check.
+
+> flutter analyze (clean packaged source, ASCII directory)
+Resolving dependencies...
+Downloading packages...
+  cupertino_icons 1.0.9 (2.0.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.4 available)
+Got dependencies!
+5 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing submission-code-check...
+No issues found! (ran in 3.5s)
+Exit code: 0
+
+> flutter test (clean packaged source, ASCII directory)
+Resolving dependencies...
+Downloading packages...
+  cupertino_icons 1.0.9 (2.0.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.4 available)
+Got dependencies!
+5 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+00:00 +0: loading C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/habit_detail_test.dart
+00:00 +0: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:00 +1: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:00 +2: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:00 +3: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:00 +4: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:00 +5: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/habit_detail_test.dart: Detail edit preserves creation and completion; deletion requires confirmation
+00:01 +6: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/localization_date_test.dart: English labels, errors, delete dialog; user content is not translated
+00:03 +7: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/localization_date_test.dart: English labels, errors, delete dialog; user content is not translated
+00:03 +8: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/search_statistics_test.dart: Search and category intersect; empty result and seven-day statistics
+00:03 +9: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/widget_test.dart: Thêm hợp lệ cắt khoảng trắng và giữ trạng thái hoàn thành cũ
+00:03 +10: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/widget_test.dart: Thêm hợp lệ cắt khoảng trắng và giữ trạng thái hoàn thành cũ
+00:03 +11: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/localization_date_test.dart: Name/note length enforcement and keyboard on narrow form
+00:04 +12: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/widget_test.dart: Hủy hoặc quay lại không thêm thói quen
+00:04 +13: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/widget_test.dart: Đánh dấu và hủy hoàn thành cập nhật số lượng độc lập
+00:04 +14: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/widget_test.dart: Trang chủ hiển thị dữ liệu mẫu và cảnh báo RAM
+00:04 +15: C:/Users/hoaia/DuAn/nhip_song_nhom18/build/submission-code-check/test/widget_test.dart: Trang chủ cuộn được trên màn hình hẹp với chữ lớn
+00:04 +16: All tests passed!
+Exit code: 0
+
+> flutter build apk --release (clean packaged source, ASCII directory)
+Resolving dependencies...
+Downloading packages...
+  cupertino_icons 1.0.9 (2.0.0 available)
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  test_api 0.7.12 (0.7.15 available)
+  vector_math 2.4.0 (2.4.4 available)
+Got dependencies!
+5 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Running Gradle task 'assembleRelease'...
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if "Windows_NT" == "Windows_NT" setlocal
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set DEFAULT_JVM_OPTS=
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set DIRNAME=C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android\
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if "C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android\" == "" set DIRNAME=.
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set APP_BASE_NAME=gradlew
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set APP_HOME=C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android\
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if defined JAVA_HOME goto findJavaFromJavaHome
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set JAVA_HOME=C:\Program Files\Android\Android Studio\jbr
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set JAVA_EXE=C:\Program Files\Android\Android Studio\jbr/bin/java.exe
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if exist "C:\Program Files\Android\Android Studio\jbr/bin/java.exe" goto init
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if not "Windows_NT" == "Windows_NT" goto win9xME_args
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if "@eval[2+2]" == "4" goto 4NT_args
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set CMD_LINE_ARGS=
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set _SKIP=2
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if "x-q" == "x" goto execute
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set CMD_LINE_ARGS=-q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9CVUlMRF9OQU1FPTEuMC4w,RkxVVFRFUl9CVUlMRF9OVU1CRVI9MQ==,RkxVVFRFUl9WRVJTSU9OPTMuNDcuOQ==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049YzE5N2NhNTE5OQ==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049ODljMzllZGZkZg==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMy43 -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=true -Pflutter.androidSdkRoot=C:\Users\hoaia\AppData\Local\Android\sdk -Pflutter.installedNdkVersions=28.2.13676358,30.0.16248370 -Pflutter.sdkManagerPath=C:\Users\hoaia\AppData\Local\Android\sdk\cmdline-tools\latest\bin\sdkmanager.bat assembleRelease
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>goto execute
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>set CLASSPATH=C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android\\gradle\wrapper\gradle-wrapper.jar
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>"C:\Program Files\Android\Android Studio\jbr/bin/java.exe"    "-Dorg.gradle.appname=gradlew" -classpath "C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android\\gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain -q -Ptarget-platform=android-arm,android-arm64,android-x64 -Ptarget=lib\main.dart -Pbase-application-name=android.app.Application -Pdart-defines=RkxVVFRFUl9CVUlMRF9OQU1FPTEuMC4w,RkxVVFRFUl9CVUlMRF9OVU1CRVI9MQ==,RkxVVFRFUl9WRVJTSU9OPTMuNDcuOQ==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049YzE5N2NhNTE5OQ==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049ODljMzllZGZkZg==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMy43 -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=true -Pflutter.androidSdkRoot=C:\Users\hoaia\AppData\Local\Android\sdk -Pflutter.installedNdkVersions=28.2.13676358,30.0.16248370 -Pflutter.sdkManagerPath=C:\Users\hoaia\AppData\Local\Android\sdk\cmdline-tools\latest\bin\sdkmanager.bat assembleRelease
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/C:/Users/hoaia/.gradle/wrapper/dists/gradle-9.3.1-all/9ot9r568e8zfvvd4mn8rbu1j0/gradle-9.3.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+System.Management.Automation.RemoteException
+Font asset "MaterialIcons-Regular.otf" was tree-shaken, reducing it from 1645184 to 4004 bytes (99.8% reduction). Tree-shaking can be disabled by providing the --no-tree-shake-icons flag when building your app.
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if "0" == "0" goto mainEnd
+
+C:\Users\hoaia\DuAn\nhip_song_nhom18\build\submission-code-check\android>if "Windows_NT" == "Windows_NT" endlocal
+Running Gradle task 'assembleRelease'...                           37.9s
+√ Built build\app\outputs\flutter-apk\app-release.apk (49.8MB)
+Exit code: 0

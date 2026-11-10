@@ -1,0 +1,10 @@
+{
+  "report_pdf_pages": 16,
+  "report_docx_images": 7,
+  "slide_pdf_pages": 9,
+  "pptx_slides": 9,
+  "office_zip_structure": "passed",
+  "vietnamese_pdf_text": "passed",
+  "pdf_pages_rendered": "all",
+  "office_gui_opened": false
+}
