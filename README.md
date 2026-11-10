@@ -1,17 +1,35 @@
-# nhip_song
+# Nhịp Sống — Nhóm 18
 
-A new Flutter project.
+Bài tập lớn môn Lập trình thiết bị di động.
 
-## Getting Started
+## Thông tin sinh viên
+- Họ tên: Hồ Văn Hoài Anh
+- Mã sinh viên: 24106659
+- Lớp: CSE702027-1-1-26(N01)
+- Nhóm: 18
+- Thực hiện cá nhân, đã được giảng viên cho phép.
 
-This project is a starting point for a Flutter application.
+## Đề tài
+Ứng dụng Flutter theo dõi thói quen hằng ngày.
 
-A few resources to get you started if this is your first Flutter project:
+## Chức năng dự kiến
+- Thêm, sửa và xóa thói quen.
+- Đánh dấu hoàn thành theo ngày.
+- Xem thống kê.
+- Giao diện tiếng Việt và tiếng Anh.
+- Trang thông tin nhóm.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+## Trạng thái hiện tại
+Đã khởi tạo dự án Flutter mẫu, kiểm thử và build APK thành công.
+Các chức năng của Nhịp Sống sẽ được triển khai từng bước.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Chạy ứng dụng
+```bash
+flutter pub get
+flutter run -d chrome
+```
+
+## Build Android
+```bash
+flutter build apk --release
+```
