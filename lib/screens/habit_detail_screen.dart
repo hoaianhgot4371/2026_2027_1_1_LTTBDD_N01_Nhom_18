@@ -1,3 +1,5 @@
+import '../language.dart';
+
 import 'package:flutter/material.dart';
 
 import '../data/habit_store.dart';
@@ -14,24 +16,33 @@ class HabitDetailScreen extends StatelessWidget {
     listenable: store,
     builder: (context, _) {
       final matches = store.habits.where((h) => h.id == id);
-      if (matches.isEmpty) return const Scaffold();
+      if (matches.isEmpty) return Scaffold();
       final habit = matches.first;
       return Scaffold(
-        appBar: AppBar(title: const Text('Chi tiết thói quen')),
+        appBar: AppBar(
+          title: Text(context.tr('Chi tiết thói quen', 'Habit details')),
+        ),
         body: ListView(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20),
           children: [
             Text(habit.name, style: Theme.of(context).textTheme.headlineMedium),
-            const SizedBox(height: 16),
-            Text(habit.note.isEmpty ? 'Chưa có ghi chú' : habit.note),
-            const SizedBox(height: 16),
+            SizedBox(height: 16),
             Text(
-              'Ngày tạo: ${habit.createdAt.day}/${habit.createdAt.month}/${habit.createdAt.year}',
+              habit.note.isEmpty
+                  ? context.tr('Chưa có ghi chú', 'No note yet')
+                  : habit.note,
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: 16),
+            Text(
+              context.tr(
+                'Ngày tạo: ${habit.createdAt.day}/${habit.createdAt.month}/${habit.createdAt.year}',
+                'Created: ${habit.createdAt.day}/${habit.createdAt.month}/${habit.createdAt.year}',
+              ),
+            ),
+            SizedBox(height: 24),
             FilledButton.icon(
-              icon: const Icon(Icons.edit_outlined),
-              label: const Text('Sửa thói quen'),
+              icon: Icon(Icons.edit_outlined),
+              label: Text(context.tr('Sửa thói quen', 'Edit habit')),
               onPressed: () async {
                 final edited = await Navigator.of(context).push<Habit>(
                   MaterialPageRoute(
@@ -41,26 +52,29 @@ class HabitDetailScreen extends StatelessWidget {
                 if (edited != null) store.update(edited);
               },
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12),
             OutlinedButton.icon(
-              icon: const Icon(Icons.delete_outline),
-              label: const Text('Xóa thói quen'),
+              icon: Icon(Icons.delete_outline),
+              label: Text(context.tr('Xóa thói quen', 'Delete habit')),
               onPressed: () async {
                 final confirmed = await showDialog<bool>(
                   context: context,
                   builder: (context) => AlertDialog(
-                    title: const Text('Xóa thói quen?'),
+                    title: Text(context.tr('Xóa thói quen?', 'Delete habit?')),
                     content: Text(
-                      'Xóa “${habit.name}” và toàn bộ đánh dấu hoàn thành? Không thể hoàn tác.',
+                      context.tr(
+                        'Xóa “${habit.name}” và toàn bộ đánh dấu hoàn thành? Không thể hoàn tác.',
+                        'Delete “${habit.name}” and all its completions? This cannot be undone.',
+                      ),
                     ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context, false),
-                        child: const Text('Hủy'),
+                        child: Text(context.tr('Hủy', 'Cancel')),
                       ),
                       FilledButton(
                         onPressed: () => Navigator.pop(context, true),
-                        child: const Text('Xóa'),
+                        child: Text(context.tr('Xóa', 'Delete')),
                       ),
                     ],
                   ),

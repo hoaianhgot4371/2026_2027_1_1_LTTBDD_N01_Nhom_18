@@ -93,7 +93,7 @@ void main() {
       if (cancel) {
         await tester.tap(find.text('Hủy'));
       } else {
-        await tester.pageBack();
+        await tester.tap(find.byType(BackButton));
       }
       await tester.pumpAndSettle();
       await show(tester, find.text('4 thói quen dành cho bạn'), -150);
